@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 // ReactDOM.createRoot()，类似main() 函数
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+
 // root.render(<App />) 是 React 18 中用于将 React 组件渲染到 DOM 中的方法
 root.render(
   <React.StrictMode>
