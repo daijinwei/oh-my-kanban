@@ -67,6 +67,7 @@ const KanbanNewCard = ({ onSubmit }) => {
        onSubmit(title);
     }
   };
+
  /*
   1. <input> 元素
   <input> 是 HTML 中的输入框元素，type="text" 表示这是一个文本输入框。
@@ -98,11 +99,16 @@ const KanbanNewCard = ({ onSubmit }) => {
 
 // 根组件（如 App 组件）类似main() 中的逻辑	
 function App() {
-   const [showAdd, setShowAdd] = useState(false);
-    const handleAdd = (evt) => {
-      setShowAdd(true);
-    };
-
+    const [showAdd, setShowAdd] = useState(false);
+      const handleAdd = (evt) => {
+        setShowAdd(true);
+      };
+    const [todoList, setTodoList] = useState([
+      { title: '开发任务-1', status: '22-05-22 18:15' },
+      { title: '开发任务-3', status: '22-05-22 18:15' },
+      { title: '开发任务-5', status: '22-05-22 18:15' },
+      { title: '测试任务-3', status: '22-05-22 18:15' }
+  ]);
   // 在新卡片插入同时，“添加新卡片”卡片消失，回到 1 的状态
   // 箭头函数的基本语法如下：
   //  =>：箭头符号，表示这是一个箭头函数。
@@ -112,8 +118,12 @@ function App() {
   const handleSubmit = (title) => {
     // unshift() 是 JavaScript 数组的一个方法，用于向数组的开头添加一个或多个元素。
     // 它会修改原数组，并返回数组的新长度。
-     todoList.unshift({ title, status: new Date().toDateString() });
-     setShowAdd(false);
+    // todoList.unshift({ title, status: new Date().toDateString() });
+    // setShowAdd(false);
+    setTodoList(currentTodoList => [
+      { title, status: new Date().toDateString() },
+      ...currentTodoList
+    ]);
   };
 
   return (
