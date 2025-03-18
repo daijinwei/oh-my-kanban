@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const todoList = [
   { title: '开发任务-1', status: '22-05-22 18:15' },
@@ -43,7 +43,10 @@ const KanbanNewCard = () => {
 
 const KanbanNewCard = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
-  
+  const inputElem = useRef(null); 
+  useEffect(()=>{
+    inputElem.current.focus();
+  }, []);
   /*
   1. evt.target.value
   evt.target 是触发事件的 DOM 元素（在这里是 <input> 输入框）。
@@ -90,7 +93,7 @@ const KanbanNewCard = ({ onSubmit }) => {
     <li className="kanban-card">
         <h3>添加新卡片</h3>
           <div className="card-title">
-          <input type="text" value={title}
+          <input type="text" value={title} ref={inputElem}
           onChange={handleChange} onKeyDown={handleKeyDown} />
         </div>
     </li>
