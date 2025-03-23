@@ -4,16 +4,7 @@ import { css } from '@emotion/react';
 import logo from './logo.svg';
 import './App.css';
 import KanbanColumn from './KanbanColumn';
-
-const KanbanBoard = ({ children }) => (
-  <main css={css`
-    flex: 10;
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    margin: 0 1rem 1rem;
-  `}>{children}</main>
-);
+import KanbanBoard from './KanbanBoard';
 
 const kanbanCardStyles = css`
   margin-bottom: 1rem;
