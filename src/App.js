@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/react';
 import logo from './logo.svg';
 import './App.css';
 import KanbanColumn from './KanbanColumn';
 import KanbanBoard from './KanbanBoard';
+import KanbanCard from './KanbanCard';
 
-const kanbanCardStyles = css`
+export const kanbanCardStyles = css`
   margin-bottom: 1rem;
   padding: 0.6rem 1rem;
   border: 1px solid gray;
@@ -19,51 +20,14 @@ const kanbanCardStyles = css`
     box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.3), inset 0 1px #fff;
   }
 `;
-const kanbanCardTitleStyles = css`
+export const kanbanCardTitleStyles = css`
   min-height: 1rem;
 `;
 
-const MINUTE = 60 * 1000;
-const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
-const UPDATE_INTERVAL = MINUTE;
-const KanbanCard = ({ title, status, onDragStart }) => {
-  const [displayTime, setDisplayTime] = useState(status);
-  useEffect(() => {
-    const updateDisplayTime = () => {
-      const timePassed = new Date() - new Date(status);
-      let relativeTime = '刚刚';
-      if (MINUTE <= timePassed && timePassed < HOUR) {
-        relativeTime = `${Math.ceil(timePassed / MINUTE)} 分钟前`;
-      } else if (HOUR <= timePassed && timePassed < DAY) {
-        relativeTime = `${Math.ceil(timePassed / HOUR)} 小时前`;
-      } else if (DAY <= timePassed) {
-        relativeTime = `${Math.ceil(timePassed / DAY)} 天前`;
-      }
-      setDisplayTime(relativeTime);
-    };
-
-    const intervalId = setInterval(updateDisplayTime, UPDATE_INTERVAL);
-    updateDisplayTime();
-
-
-    return function cleanup() {
-      clearInterval(intervalId);
-    };
-  }, [status]);
-  const handleDragStart = (evt) => {
-    evt.dataTransfer.effectAllowd = 'move';
-    evt.dataTransfer.setData('text/plain', title);
-    onDragStart && onDragStart(evt);
-  };
-  return (
-    <li css={kanbanCardStyles} draggable onDragStart={handleDragStart}>
-      <div css={kanbanCardTitleStyles}>{title}</div>
-      <div css={css`/*省略*/`} title={status}>{displayTime}</div>
-    </li>
-  );
-};
-
+export const MINUTE = 60 * 1000;
+export const HOUR = 60 * MINUTE;
+export const DAY = 24 * HOUR;
+export const UPDATE_INTERVAL = MINUTE;
 const KanbanNewCard = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
   const handleChange = (evt) => {
