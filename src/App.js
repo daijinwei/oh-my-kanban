@@ -6,6 +6,7 @@ import './App.css';
 import KanbanColumn from './KanbanColumn';
 import KanbanBoard from './KanbanBoard';
 import KanbanCard from './KanbanCard';
+import KanbanNewCard from './KanbanNewCard';
 
 export const kanbanCardStyles = css`
   margin-bottom: 1rem;
@@ -28,34 +29,6 @@ export const MINUTE = 60 * 1000;
 export const HOUR = 60 * MINUTE;
 export const DAY = 24 * HOUR;
 export const UPDATE_INTERVAL = MINUTE;
-const KanbanNewCard = ({ onSubmit }) => {
-  const [title, setTitle] = useState('');
-  const handleChange = (evt) => {
-    setTitle(evt.target.value);
-  };
-  const handleKeyDown = (evt) => {
-    if (evt.key === 'Enter') {
-      onSubmit(title);
-    }
-  };
-
-  return (
-    <li css={kanbanCardStyles}>
-      <h3>添加新卡片</h3>
-      <div css={css`
-        ${kanbanCardTitleStyles}
-
-        & > input[type="text"] {
-          width: 80%;
-        }
-      `}>
-        <input type="text" value={title}
-          onChange={handleChange} onKeyDown={handleKeyDown} />
-      </div>
-    </li>
-  );
-};
-
 const COLUMN_BG_COLORS = {
   todo: '#C9AF97',
   ongoing: '#FFE799',
